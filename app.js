@@ -24,7 +24,7 @@ function initThemeToggle() {
     const htmlEl = document.documentElement;
 
     // Check system preference or localStorage
-    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const savedTheme = localStorage.getItem('theme') || 'light';
     htmlEl.setAttribute('data-theme', savedTheme);
 
     themeToggle.addEventListener('click', () => {
