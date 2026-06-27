@@ -479,12 +479,11 @@ function initFAQAccordion() {
 }
 
 /* ==========================================
- * 10. Contact Form CRM Simulation Logger
+ * 10. Contact Form Submission
  * ========================================== */
 function initContactFormConsole() {
     const form = document.getElementById('contactForm');
     const btnSubmit = document.getElementById('btnSubmitForm');
-    const consoleOutput = document.getElementById('consoleOutput');
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -492,47 +491,27 @@ function initContactFormConsole() {
         const name = document.getElementById('formName').value.trim();
         const email = document.getElementById('formEmail').value.trim();
         const phone = document.getElementById('formPhone').value.trim();
-        const company = document.getElementById('formCompany').value.trim() || 'Not Specified';
-        const service = document.getElementById('formServices').value;
 
         if (!name || !email || !phone) return;
 
         btnSubmit.disabled = true;
-        btnSubmit.innerText = "Processing CRM Automations...";
-        consoleOutput.innerHTML = `[INITIALIZING] Connecting to Intelloworks API nodes...`;
+        btnSubmit.innerText = "Sending...";
 
-        // Sequential fake terminal output simulation
-        const logLines = [
-            `[CRM API] Establish connection to active workspace DB.`,
-            `[DB SUCCESS] Created lead profile for "${name}" (${email})`,
-            `[CRM ENGINE] Moving deal to pipeline stage: "New Inquiries"`,
-            `[LOGIC ENGINE] Running workflow rules for service target: "${service}"`,
-            `[SMS WORKFLOW] Dispatching SMS payload via Twilio Integration to ${phone}...`,
-            `[SMS SUCCESS] Text sent: "Hi ${name}, welcome to Intelloworks! A consultant will call you shortly."`,
-            `[EMAIL PIPELINE] Queued welcome materials & brochure PDF to ${email}`,
-            `[NOTIFY] Sent Slack/Discord push alert to sales operations team.`,
-            `[COMPLETE] Workspace CRM Flow finished successfully. Lead synchronized. ✅`
-        ];
-
-        let index = 0;
-        const intervalId = setInterval(() => {
-            if (index < logLines.length) {
-                consoleOutput.innerHTML += `\n${logLines[index]}`;
-                consoleOutput.scrollTop = consoleOutput.scrollHeight;
-                index++;
-            } else {
-                clearInterval(intervalId);
-                btnSubmit.innerText = "Form Submitted Successfully";
-                
-                // Reset form fields
-                form.reset();
-                
-                // Allow submitting again after a few seconds
-                setTimeout(() => {
-                    btnSubmit.disabled = false;
-                    btnSubmit.innerText = "Submit Form & Trigger CRM Flow";
-                }, 5000);
-            }
-        }, 600);
+        // Simulate network request
+        setTimeout(() => {
+            btnSubmit.innerText = "Thank You!";
+            
+            // Show browser alert feedback
+            alert(`Thank you, ${name}! Your request has been received. Our team will contact you shortly.`);
+            
+            // Reset form fields
+            form.reset();
+            
+            // Restore button state
+            setTimeout(() => {
+                btnSubmit.disabled = false;
+                btnSubmit.innerText = "Submit";
+            }, 3000);
+        }, 1200);
     });
 }
