@@ -36,6 +36,8 @@
     --text-secondary: #9CA3AF;
     --text-muted: #6B7280;
     --glow-color: rgba(139, 92, 246, 0.15);
+    --bg-input: rgba(0, 0, 0, 0.3);
+    --border-input: rgba(255, 255, 255, 0.08);
     
     /* General Accent Tokens */
     --color-purple: #8B5CF6;
@@ -66,6 +68,8 @@
     --glow-color: rgba(139, 92, 246, 0.05);
     --grad-text: linear-gradient(135deg, #111827 0%, #374151 100%);
     --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+    --bg-input: #F3F4F6;
+    --border-input: rgba(0, 0, 0, 0.1);
 }
 
 /* Light Mode Element Overrides */
@@ -153,6 +157,14 @@
 
 [data-theme="light"] .faq-item.active {
     background: #FFFFFF;
+}
+
+[data-theme="light"] .simulator-tabs {
+    background: #F3F4F6;
+}
+
+[data-theme="light"] .sim-tab-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.5);
 }
 
 html {
@@ -1029,8 +1041,8 @@ body {
 
 .simulation-log {
     margin-top: 15px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-color);
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
     border-radius: 6px;
     padding: 12px;
     font-family: monospace;
@@ -1365,14 +1377,19 @@ body {
 
 .form-control {
     width: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-color);
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
     padding: 10px 14px;
     border-radius: 6px;
     color: var(--text-primary);
     font-family: var(--font-primary);
     font-size: 0.9rem;
-    transition: border var(--transition-fast);
+    transition: border var(--transition-fast), background-color var(--transition-fast);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.8;
 }
 
 .form-control:focus {
@@ -1606,6 +1623,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.item-img-container:has(.logo-img-style) {
     padding: 15px;
 }
 
@@ -1613,6 +1633,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top;
     transition: transform var(--transition-slow);
 }
 
